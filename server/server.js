@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-app.use("/", express.static("static"));
+app.use("/", express.static(__dirname + "/static"));
 
 io.on("connection", socket => {
     socket.on("signal", async (text, callback) => {
@@ -18,5 +18,5 @@ io.on("connection", socket => {
 const port = process.argv[2] || 8000;
 server.listen(port, () => {
     startPyret();
-    console.log(`listening on *:${port}`);
+    console.log(`Listening on *:${port}`);
 });

@@ -3,7 +3,7 @@ const {spawn} = require("child_process");
 let pyret, lastPyretResponse = null;
 
 function startPyret() {
-    pyret = spawn("node", ["index.jarr"]);
+    pyret = spawn("node", [__dirname + "/../pyret/index.jarr"]);
 
     pyret.stdout.on("data", data => {
         lastPyretResponse = data;
