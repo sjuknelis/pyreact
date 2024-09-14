@@ -11,21 +11,27 @@ fun decrement(state :: PageState) -> PageState:
 end
 
 fun page(state :: PageState) -> HtmlNode:
-  html-el("div",
-    [list: html-prop("style", "border: 1px solid black")],
-    empty,
-    [list: html-el("p",
-        [list: html-prop("style", "color: red")],
-        empty,
-        [list: html-text("count: " + get-state(state, "count"))]),
-      html-el("button",
-        empty,
-        [list: html-event("onclick", increment)],
-        [list: html-text("increment")]),
-      html-el("button",
-        empty,
-        [list: html-event("onclick", decrement)],
-        [list: html-text("decrement")])])
+  count = raising-string-to-number(get-state(state, "count"))
+
+  if count < 10:
+    html-el("div",
+      [list: html-prop("style", "border: 1px solid black")],
+      empty,
+      [list: html-el("p",
+          [list: html-prop("style", "color: red")],
+          empty,
+          [list: html-text("count: " + num-to-string(count))]),
+        html-el("button",
+          empty,
+          [list: html-event("onclick", increment)],
+          [list: html-text("increment")]),
+        html-el("button",
+          empty,
+          [list: html-event("onclick", decrement)],
+          [list: html-text("decrement")])])
+  else:
+    html-el("p", empty, empty, [list: html-text("too high >:(")])
+  end
 end
 
 fun initial-state() -> PageState:
