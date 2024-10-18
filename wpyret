@@ -1,0 +1,3 @@
+#!/bin/zsh
+node $(dirname $0)/preproc.js $1 &&
+pyret w-$1
